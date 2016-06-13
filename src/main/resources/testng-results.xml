@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results failed="4" passed="33" skipped="0" total="37">
+  <reporter-output>
+      <line>
+      Please Refer the Individual Module Test Reports for the Extended Log
+    </line>
+  </reporter-output>
+  <!-- API - Test Suite -->
+  <suite duration-ms="0" finished-at="2014-12-02T11:31:53Z"
+          name="Test Suites"
+          started-at="2014-12-02T11:31:53Z">
+      <groups>
+    </groups>
+    <!-- Module Tests -->
+
+  </suite> 
+   <!-- API - Test Suite -->
+</testng-results>
