@@ -2,7 +2,7 @@
  * Decompiled with CFR 0_114.
  * 
  * Could not load the following classes:
- *  com.org.qa.testngreporter.CreateXSLTReport
+ *  CreateXSLTReport
  *  org.apache.maven.plugin.AbstractMojo
  *  org.apache.maven.plugin.MojoExecutionException
  *  org.apache.maven.plugin.logging.Log
@@ -10,13 +10,11 @@
  *  org.apache.maven.plugins.annotations.Mojo
  *  org.apache.maven.plugins.annotations.Parameter
  */
-package com.org.qa.testngreporter;
+package se.cambio.test.taf.testngreporter;
 
-import com.org.qa.testngreporter.CreateXSLTReport;
 import java.io.IOException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;

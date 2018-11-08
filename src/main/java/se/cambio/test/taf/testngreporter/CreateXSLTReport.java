@@ -1,4 +1,4 @@
-package com.org.qa.testngreporter;
+package se.cambio.test.taf.testngreporter;
 
 import com.google.common.io.Files;
 
@@ -85,6 +85,13 @@ public final class CreateXSLTReport {
         for (File pngfile : pngfiles) {
             Files.copy((File)pngfile, (File)new File(outputfolder + "/" + pngfile.getName()));
         }
+
+        // Copy Screenshots
+        File screenshot_inputDir = new File(this.testnginputfolder+"/../screenshots/");
+        if (screenshot_inputDir.exists()) {
+            FileUtils.copyDirectoryToDirectory((File) screenshot_inputDir, (File) outputfolder);
+        }
+
         FileUtils.copyDirectoryToDirectory((File)inputfolder, (File)outputfolder);
         return reportoutputfolder;
     }

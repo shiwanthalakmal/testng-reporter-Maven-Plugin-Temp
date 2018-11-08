@@ -1,4 +1,4 @@
-package com.org.qa.testngreporter;
+package se.cambio.test.taf.testngreporter;
 
 import java.io.File;
 import java.io.FileInputStream;

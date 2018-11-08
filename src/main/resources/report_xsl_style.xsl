@@ -95,26 +95,33 @@
             .suiteMenuHeader { margin-top: 10px; }
             .suiteMenuHeader td { padding: 5px; background-color: #e0e0e0; font-size: 12px; width: 100%; vertical-align: top; }
 
+            tr.methodsTableHeader { background-color: #cedcec; font-weight: bold; }
+            tr.methodsTableHeader td { padding: 3px; }
+
             .suiteStatusPass, .suiteStatusFail, .suiteStatus { padding-right: 20px; width: 20px; height: 20px; margin: 2px 4px 2px 2px; display: inline; }
             .suiteStatusPass { background-color: green; }
             .suiteStatusFail { background-color: red; }
             .suiteStatus { border:2px solid #f5f5f5; background-color: #f5f5f5; }
 
             .testCaseLink, .testCaseLinkSelected { margin-top: 2px; padding: 4px; cursor: pointer; }
-            .testCaseLink { background-color: #f6f6f6; }
+            .testCaseLink { background-color: white; }
             .testCaseLinkSelected { background-color: lightblue; border: 1px solid gray;  padding: 3px; }
             .testCaseFail, .testCasePass, .testCaseSkip { padding-right: 15px; width: 15px; height: 15px; margin: 2px 4px 2px 2px; display: inline; }
             .testCaseFail { background-color: red; }
             .testCasePass { background-color: green; }
             .testCaseSkip { background-color: yellow; }
 
-            tr.methodsTableHeader { background-color: #cedcec; font-weight: bold; }
-            tr.methodsTableHeader td { padding: 3px; }
+            .suiteTableHeader { margin-top: 1px; font-size: 12px; cell-padding: 10; cell-spacing: 7; }
+            .suiteTableHeader tr { margin-top: 2px; padding: 4px; background-color: white; font-size: 11px; font-weight: bold; }
+            .suiteTableHeader td { margin: 2px 2px 2px 2px; }
+            .suiteTablePassRate { margin-top: 2px; padding: 4px; background-color: white; }
 
 			tr.serviceRunTableHeader { background-color: #eaf0f7; font-weight: bold; }
-            tr.serviceRunTableHeader td { padding: 3px; }
+            tr.serviceRunTableHeader td { margin-top: 2px; padding: 4px; }
 
-            .testMethodStatusFAIL a, .testMethodStatusPASS a, .testMethodStatusSKIP a { text-decoration: none; cursor: pointer; font-size: 11px; font-weight: bold }
+            <!--.testMethodStatusFAIL a, .testMethodStatusPASS a, .testMethodStatusSKIP a {  color: black; text-decoration: none; cursor: pointer; font-size: 11px; font-weight: bold }-->
+			.testMethodStatusFAIL a { color: black; cursor: pointer; font-size: 11px; font-weight: bold }
+			.testMethodStatusPASS a, .testMethodStatusSKIP a { text-decoration: none; cursor: pointer; font-size: 11px; font-weight: bold }
 			.testMethodStatusFAIL td, .testMethodStatusPASS td, .testMethodStatusSKIP td { padding: 3px; }
 
 			.testMethodStatusPASS td { background-color: #2BCC71 }
@@ -154,6 +161,8 @@
 
 			.individualRunsPass td { background-color: #DBFFE2}
 			.individualRuns a { font-weight: bold}
+
+			.individualRunsFail td { background-color: #FFBBBB; cursor: pointer;}
 
 			.imgExpandClose { float: left; padding-top: 3px; padding-left: 3px; padding-right: 5px}
             ]]>
@@ -986,13 +995,16 @@ table
     <xsl:template name="htmlHead">
         <head>
             <title>
-                <xsl:value-of select="testng:getVariableSafe($testNgXslt.reportTitle, 'TestNG Results')"/>
+                <xsl:value-of select="testng:getVariableSafe($testNgXslt.reportTitle, 'CTAF Results')"/>
             </title>
+
             <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
             <meta http-equiv="pragma" content="no-cache"/>
             <meta http-equiv="cache-control" content="max-age=0"/>
             <meta http-equiv="cache-control" content="no-cache"/>
             <meta http-equiv="cache-control" content="no-store"/>
+
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
             <LINK rel="stylesheet" href="style.css"/>
             <LINK rel="stylesheet" href="default.css"/>
             <xsl:if test="$testNgXslt.cssFile">
@@ -1238,7 +1250,7 @@ table
                                 <path d="M 0 0 h {$radius} A {$radius},{$radius} 0,{$passArc},0 {$passX},{$passY} z"/>
                             </g>
                         </xsl:if>
-                        <xsl:if test="($skippedCount div $totalCount) > 0">
+                                        <xsl:if test="($skippedCount div $totalCount) > 0">
                             <g style="fill:#f2cb27" transform="rotate(360)">
                                 <path d="M 0 0 h {$radius} A {$radius},{$radius} 0,{$skipArc},0 {$skipX},{$skipY} z"/>
                             </g>
@@ -1272,28 +1284,28 @@ table
                             </td>
                             <td style="font-size: 14; background-color: #FFBBBB; padding: 3px 3px 3px 0;"
                                 align="center">
-                                <div style="width: 50px;">Failed</div>
+                                <div style="width: 60px;">Failed</div>
                             </td>
                             <td style="font-size: 14; background-color: lightgreen; padding: 3px 3px 3px 0;"
                                 align="center">
-                                <div style="width: 50px;">Passed</div>
+                                <div style="width: 60px;">Passed</div>
                             </td>
                             <td style="font-size: 14; background-color: #FFFFBB; padding: 3px 3px 3px 0;"
                                 align="center">
-                                <div style="width: 50px;">Skipped</div>
+                                <div style="width: 60px;">Skipped</div>
                             </td>
                             <td align="center"
                                 style="font-size: 14; background-color: #cedcec; padding: 3px 3px 3px 0;">
-                                <div style="width: 50px;">Total</div>
+                                <div style="width: 60px;">Total</div>
                             </td>
                             <td align="center"
                                 style="font-size: 13; background-color: #cedcec; padding: 3px 3px 3px 0;">
-                                <div style="width: 50px;">Pass(%)</div>
+                                <div style="width: 60px;">Pass(%)</div>
                             </td>
                             <xsl:if test="compare($testNgXslt.showRuntimeTotals, 'true') = 0">
                                 <td style="font-size: 14; background-color: #cedcec; padding: 3px 3px 3px 0;"
                                     align="center">
-                                    <div style="width: 80px;">Duration</div>
+                                    <div style="width: 120px;">Duration</div>
                                 </td>
                             </xsl:if>
                         </tr>
@@ -1403,17 +1415,6 @@ table
                             <td>All Test Suites Execution Log</td>
                             <td style="font-size: 14; background-color: #cedcec; padding: 3px 3px 3px 0;"
                                 align="center">
-                                <!--<div style="width: 50px;">Log</div>-->
-                                <!--<xsl:choose>
-                                    <xsl:when test="not(@is-config)">
-                                        <a onclick="toggleLogsVisibility('{$inLogDetailsId}')">
-                                            <xsl:value-of select="'Logs'"/>
-                                        </a>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        &#160;
-                                    </xsl:otherwise>
-                                </xsl:choose>-->
                                 <a onclick="toggleLogsVisibility('log_12')">
                                     <xsl:value-of select="'Logs'"/>
                                 </a>
@@ -1441,11 +1442,6 @@ table
                                 <tbody>
                                     <tr nowrap="true">
                                         <td colspan="6">
-                                            <!--<pre>
-                                                <xsl:variable name="TElogMessage"
-                                                              select="unparsed-text(concat('file:///', system-property('user.dir'), '/../', 'eselenium.log'))"/>
-                                                <xsl:value-of select="$TElogMessage"/>
-                                            </pre>-->
                                         </td>
                                     </tr>
                                 </tbody>
@@ -1457,24 +1453,6 @@ table
                 </body>
             </html>
         </xsl:result-document>
-
-        <!-- Reporter output file -->
-        <!--<xsl:result-document href="{testng:absolutePath('reporterOutput.html')}" format="xhtml">
-            <html xmlns="http://www.w3.org/1999/xhtml">
-                <xsl:call-template name="htmlHead"/>
-                <body>
-                    <h2>Reporter output</h2>
-                    <xsl:for-each select="reporter-output/line">
-                        <div>
-                            <code>
-                                <xsl:value-of select="."/>
-                            </code>
-                        </div>
-                    </xsl:for-each>
-                    <xsl:call-template name="powered-by"/>
-                </body>
-            </html>
-        </xsl:result-document>-->
 
         <!-- Pop-Up Window file -->
         <xsl:result-document href="{testng:absolutePath('logOpener.html')}" format="xhtml">
@@ -1499,11 +1477,12 @@ table
                 <xsl:call-template name="htmlHead"/>
                 <body>
                     <h2 style="margin-bottom: 5px;">
-                        <xsl:value-of select="testng:getVariableSafe($testNgXslt.reportTitle, 'TestNG Results')"/>
+                        <xsl:value-of select="testng:getVariableSafe($testNgXslt.reportTitle, 'CTAF Results')"/>
                     </h2>
+
                     <div>
                         <a href="overview.html" target="content"
-                           onclick="javscript:clearAllSelections();">Results overview
+                           onclick="javscript:clearAllSelections();"><h6>Results overview</h6>
                         </a>
                     </div>
                     <div>
@@ -1512,44 +1491,21 @@ table
                         </a>-->
                     </div>
                     <div>
+                        <br/>
+                        <!--<table class="suiteMenuHeader" width="100%" cellpadding="0" cellspacing="0">-->
+                        <!--<tr>-->
+                            <!--<td nowrap="true">-->
+                                <!--<b>Suite:<br/></b>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--</table>-->
                         <xsl:for-each select="$suiteElements">
                             <xsl:variable name="testCaseElements"
                                           select="if (test/@url) then document(test/@url)/test else test"/>
                             <table class="suiteMenuHeader" width="100%" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td nowrap="true">
-                                        <b>
-                                            <a href="{testng:suiteContentFileName(.)}" target="content"
-                                               onclick="javscript:clearAllSelections();">
-                                                <xsl:value-of select="@name"/>
-                                            </a>
-                                        </b>
-                                        <div style="margin: 3px 0 3px 0;">
-                                            <a href="{testng:suiteGroupsFileName(.)}" target="content"
-                                               onclick="javscript:clearAllSelections();">
-                                                <xsl:value-of select="count(./groups/group)"/>
-                                                Groups
-                                            </a>
-                                        </div>
-                                        <span style="color: red;">
-                                            <xsl:value-of select="testng:suiteMethodsCount($testCaseElements, 'FAIL')"/>
-                                        </span>
-                                        /
-                                        <span style="color: green;">
-                                            <xsl:value-of select="testng:suiteMethodsCount($testCaseElements, 'PASS')"/>
-                                        </span>
-                                        /
-                                        <span style="color: yellow;">
-                                            <xsl:value-of select="testng:suiteMethodsCount($testCaseElements, 'SKIP')"/>
-                                        </span>
-                                        /
-                                        <span>
-                                            <xsl:value-of select="testng:suiteMethodsCount($testCaseElements, '*')"/>
-                                        </span>
-                                    </td>
-                                    <td style="font-weight: bold;">
-                                        <xsl:value-of
-                                                select="format-number(testng:suiteMethodsCount($testCaseElements, 'PASS') div testng:suiteMethodsCount($testCaseElements, '*'), '###%')"/>
+                                       <b><xsl:value-of select="./@name"/></b>
                                     </td>
                                 </tr>
                             </table>
@@ -1567,53 +1523,38 @@ table
                             </xsl:call-template>
                         </xsl:for-each>
                     </div>
+
+
                 </body>
             </html>
         </xsl:result-document>
     </xsl:template>
 
-
-<!--    <xsl:template name="testStepsTemplate">
-        <xsl:param name="in-name"/>
-        <xsl:param name="in-started-at"/>
-        <xsl:param name="in-finished-at"/>
-        <xsl:param name="in-status"/>
-        <xsl:param name="inClassName"/>
-        <xsl:param name="xmlFile"/>
-        <xsl:param name="inTestName"/>
-        <xsl:param name="inSuiteName"/>
-
-        <xsl:variable name="xmlData" select="document($xmlFile)"/>
-        <xsl:variable name="xmlRaw" select="$xmlData/testng-results/suite[@name=$inSuiteName]/test[@name=$inTestName]/class[@name=$inClassName]/test-method[@started-at=$in-started-at and @finished-at=$in-finished-at and @name=$in-name and @status=$in-status]/logs/log"/>
-
-        <xsl:for-each select="$xmlRaw">
-            <xsl:variable name="rawNum" select="position()"/>
-            <xsl:variable name="xmlStep" select="$xmlRaw[$rawNum]"/>
-            <tr>
-                <td>
-                    <xsl:value-of select="$xmlStep/@name"/>
-                </td>
-                <td>
-                    Status
-                </td>
-                <td>
-                    Status
-                </td>
-                <td>
-                    Status
-                </td>
-                <td>
-                    Status
-                </td>
-            </tr>
-        </xsl:for-each>
-    </xsl:template>-->
-
     <xsl:template name="testStepsTemplate">
         <xsl:param name="stepsList"/>
         <xsl:for-each select="$stepsList">
-            <tr><xsl:value-of select="." disable-output-escaping="yes"/>
+            <tr>
+                <td><xsl:value-of select="." disable-output-escaping="yes"/></td>
+            </tr>
+        </xsl:for-each>
+    </xsl:template>
 
+    <xsl:template name="testStepsTemplateFail">
+        <xsl:param name="testMethodAllDetails"/>
+        <xsl:variable name="testName" select="@name"></xsl:variable>
+        <xsl:for-each select="./reporter-output/line">
+            <tr class="{if (position() = last()) then 'individualRunsFail' else 'individualRuns'}">
+                <xsl:choose>
+                    <xsl:when test="position() = last()">
+                        <td data-toggle="modal" data-target="#exampleModal"
+                            onclick="document.getElementById('ScreenshotIdImg').src='screenshots/browser/{$testName}.png'">
+                            <xsl:value-of select="." disable-output-escaping="yes"/>
+                        </td>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <td><xsl:value-of select="." disable-output-escaping="yes"/></td>
+                    </xsl:otherwise>
+                </xsl:choose>
             </tr>
         </xsl:for-each>
     </xsl:template>
@@ -1926,32 +1867,21 @@ table
                                 <table class="testMethodsTable individualRunsPass individualRuns" cellpadding="0"
                                        cellspacing="0">
                                     <tr class="serviceRunTableHeader">
-                                        <th width="100%">Test Step</th>
-                                        <th nowrap="true">Status</th>
-                                        <th nowrap="true">Browser</th>
-                                        <th nowrap="true">Desktop</th>
-                                        <th nowrap="true">Html</th>
+                                        <th width="100%">Test Steps</th>
                                     </tr>
 
-                                    <!--<xsl:variable name="rptGraphPath"
-                                                  select="'F:/Work/P/code/Projects/TestNG-Reporting/eselenium-lsibat-tests/Test_Steps.xml'"/>
-                                    <xsl:call-template name="testStepsTemplate">
-                                        <xsl:with-param name="in-name"
-                                                        select="@name"></xsl:with-param>
-                                        <xsl:with-param name="in-started-at" select="@started-at"></xsl:with-param>
-                                        <xsl:with-param name="in-finished-at"
-                                                        select="@finished-at"></xsl:with-param>
-                                        <xsl:with-param name="in-status"
-                                                        select="@status"></xsl:with-param>
-                                        <xsl:with-param name="inClassName" select="$className"/>
-                                        <xsl:with-param name="xmlFile" select="$rptGraphPath"/>
-                                        <xsl:with-param name="inTestName" select="../../@name"/>
-                                        <xsl:with-param name="inSuiteName" select="../../../@name"/>
-                                    </xsl:call-template>-->
-
-                                    <xsl:call-template name="testStepsTemplate">
-                                        <xsl:with-param name="stepsList" select="./reporter-output/line"/>
-                                    </xsl:call-template>
+                                    <xsl:choose>
+                                        <xsl:when test=".[@status='PASS']">
+                                            <xsl:call-template name="testStepsTemplate">
+                                                <xsl:with-param name="stepsList" select="./reporter-output/line"/>
+                                            </xsl:call-template>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:call-template name="testStepsTemplateFail">
+                                                <xsl:with-param name="testMethodAllDetails" select="."/>
+                                            </xsl:call-template>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </table>
                             </div>
                         </div>
@@ -2013,20 +1943,33 @@ table
 
     <xsl:template name="suiteTestCasesLinks">
         <xsl:param name="testCases"/>
-        <xsl:for-each select="$testCases">
-            <xsl:sort order="ascending"
-                      select="if (compare($testNgXslt.sortTestCaseLinks, 'true') = 0) then @name else ''"/>
-            <div class="testCaseLink"
-                 onclick="javscript:selectTestCaseLink(this); parent.content.location='{testng:testCaseContentFileName(.)}'">
-                <div class="{if (count(./class/test-method[@status='FAIL']) > 0)
-                                then 'testCaseFail'
-                                else if ((count(./class/test-method[@status='FAIL']) = 0) and (count(./class/test-method[@status='PASS']) > 0))
-                                    then 'testCasePass'
-                                    else 'testCaseSkip'}">
-                </div>
-                <xsl:value-of select="@name"/>
-            </div>
-        </xsl:for-each>
+        <table class="suiteTableHeader">
+            <xsl:for-each select="$testCases">
+                <xsl:sort order="ascending"
+                          select="if (compare($testNgXslt.sortTestCaseLinks, 'true') = 0) then @name else ''"/>
+
+                    <tr>
+                        <td width="75%">
+                            <div class="testCaseLink"
+                                 onclick="javscript:selectTestCaseLink(this); parent.content.location='{testng:testCaseContentFileName(.)}'">
+                                <div class="{if (count(./class/test-method[@status='FAIL']) > 0)
+                                                then 'testCaseFail'
+                                                else if ((count(./class/test-method[@status='FAIL']) = 0) and (count(./class/test-method[@status='PASS']) > 0))
+                                                    then 'testCasePass'
+                                                    else 'testCaseSkip'}">
+                                </div>
+                                <xsl:value-of select="@name"/>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="suiteTablePassRate"><div>
+                                <xsl:value-of
+                                        select="format-number(testng:suiteMethodsCount(., 'PASS') div testng:suiteMethodsCount(., '*'), '###%')"/>
+                            </div></div>
+                        </td>
+                    </tr>
+            </xsl:for-each>
+        </table>
     </xsl:template>
 
     <xsl:template name="suiteTestCasesContentFiles">
@@ -2062,6 +2005,27 @@ table
                             <xsl:with-param name="skipedMethods" select="./class/test-method[@status='SKIP']"/>
                         </xsl:call-template>
                         <xsl:call-template name="powered-by"/>
+
+                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+                        <!--&lt;!&ndash;&lt;!&ndash; Modal for screenshots &ndash;&gt;&ndash;&gt;-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    </div>
+                                    <div class="modal-body">
+                                        <img name="ScreenshotIdImg" id="ScreenshotIdImg" border="0" width="100%" src="test.png"></img>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </body>
                 </html>
             </xsl:result-document>
@@ -2075,34 +2039,34 @@ table
         <xsl:param name="totalCount"/>
         <xsl:param name="totalDuration"/>
         <td style="background-color: #FFBBBB; padding: 3px 3px 3px 0;" align="center">
-            <div style="width: 50px;">
+            <div style="width: 60px;">
                 <xsl:value-of select="$failedCount"/>
             </div>
         </td>
         <td style="background-color: lightgreen; padding: 3px 3px 3px 0;" align="center">
-            <div style="width: 50px;">
+            <div style="width: 60px;">
                 <xsl:value-of select="$passedCount"/>
             </div>
         </td>
         <td style="background-color: #FFFFBB; padding: 3px 3px 3px 0;" align="center">
-            <div style="width: 50px;">
+            <div style="width: 60px;">
                 <xsl:value-of select="$skippedCount"/>
             </div>
         </td>
         <td align="center" style="background-color: #cedcec; padding: 3px 3px 3px 0;">
-            <div style="width: 50px;">
+            <div style="width: 60px;">
                 <xsl:value-of select="$totalCount"/>
             </div>
         </td>
         <td align="center" style="font-weight: bold; background-color: #cedcec; padding: 3px 3px 3px 0;">
-            <div style="width: 50px;">
+            <div style="width: 60px;">
                 <xsl:value-of
                         select="if ($totalCount > 0) then format-number($passedCount div $totalCount, '###%') else '100%'"/>
             </div>
         </td>
         <xsl:if test="compare($testNgXslt.showRuntimeTotals, 'true') = 0">
             <td style="background-color: #cedcec; padding: 3px 3px 3px 0;" align="center">
-                <div style="width: 80px;">
+                <div style="width: 120px;">
                     <xsl:value-of select="$totalDuration"/>
                 </div>
             </td>
@@ -2113,7 +2077,7 @@ table
         <div style="margin-top: 15px; color: gray; text-align: center; font-size: 9px;">
             Copyright ©
             <a href="" style="color: #8888aa;" target="_blank">
-                TAF - Frame Work
+                HelloFresh Global Cop.
             </a>
         </div>
     </xsl:template>

@@ -1,4 +1,4 @@
-package com.org.qa.testngreporter;
+package se.cambio.test.taf.testngreporter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.w3c.dom.Document;
@@ -31,11 +30,11 @@ public class HelpMojo extends AbstractMojo {
     private int lineLength;
     @Parameter(property="indentSize", defaultValue="2")
     private int indentSize;
-    private static final String PLUGIN_HELP_PATH = "/META-INF/maven/com.org.qa/testngreporter-maven-plugin/plugin-help.xml";
+    private static final String PLUGIN_HELP_PATH = "/META-INF/maven/se.cambio.test.taf/testngreporter-maven-plugin/plugin-help.xml";
 
     private Document build() throws MojoExecutionException {
-        this.getLog().debug((CharSequence)"load plugin-help.xml: /META-INF/maven/com.org.qa/testngreporter-maven-plugin/plugin-help.xml");
-        InputStream is = this.getClass().getResourceAsStream("/META-INF/maven/com.org.qa/testngreporter-maven-plugin/plugin-help.xml");
+        this.getLog().debug((CharSequence)"load plugin-help.xml: /META-INF/maven/se.cambio.test.taf/testngreporter-maven-plugin/plugin-help.xml");
+        InputStream is = this.getClass().getResourceAsStream("/META-INF/maven/se.cambio.test.taf/testngreporter-maven-plugin/plugin-help.xml");
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
